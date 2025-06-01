@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  packages: write
 
 jobs:
   replace:
@@ -30,4 +31,17 @@ jobs:
           git commit -m "Update tag from 1 to 2" || echo "No changes to commit"
           git push
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Create and push docker image
+        run: |
+          IMAGE_NAME=ghcr.io/${{ github.repository }}/replace-tag
+          COMMIT_HASH=$(git rev-parse --short HEAD)
+
+          echo "Building Docker image..."
+          docker build -t $IMAGE_NAME:$COMMIT_HASH .
+
+          echo "Pushing Docker image to GHCR..."
+          docker push $IMAGE_NAME:$COMMIT_HASH
+        env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
