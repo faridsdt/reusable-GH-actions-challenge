@@ -1,7 +1,7 @@
 name: Replace Tag Reusable Workflow
 
-on:
-  workflow_call:
+on: 
+  workflow_dispatch:
     inputs:
       file:
         required: true
