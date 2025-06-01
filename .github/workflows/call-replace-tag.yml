@@ -5,6 +5,10 @@ on:
     paths:
       - 'sample.txt'
 
+permissions:
+  contents: write
+  packages: write
+
 jobs:
   call-replace-tag:
     uses: ./.github/workflows/replace-tag-reusable.yml
