@@ -1,0 +1,16 @@
+name: replace tag GH action
+description: This GH action will replace "tag1" with "tag2" in the given text file
+
+inputs:
+  file:
+    description: "path to the file to modify"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Do the tag replacement
+      run: sed -i 's/tag 1/tag 2/g' "${{ inputs.file }}"
+    
+    - name: Echo the file
+      run: cat "${{ inputs.file }}"
