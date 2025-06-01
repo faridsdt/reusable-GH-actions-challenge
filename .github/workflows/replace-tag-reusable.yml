@@ -42,6 +42,9 @@ jobs:
           echo "Building Docker image..."
           docker build -t $IMAGE_NAME:$COMMIT_HASH .
 
+          echo "Logging in to ghcr.io"
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
           echo "Pushing Docker image to GHCR..."
           docker push $IMAGE_NAME:$COMMIT_HASH
         env: 
