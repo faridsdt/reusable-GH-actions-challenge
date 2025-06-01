@@ -1,0 +1,12 @@
+name: Call Replace Tag
+
+on:
+  push:
+    paths:
+      - 'sample.txt'
+
+jobs:
+  call-replace-tag:
+    uses: ./.github/workflows/replace-tag-reusable.yml
+    with:
+      file: 'sample.txt'
