@@ -10,7 +10,9 @@ runs:
   using: composite
   steps:
     - name: Do the tag replacement
+      shell: bash
       run: sed -i 's/tag 1/tag 2/g' "${{ inputs.file }}"
     
     - name: Echo the file
+      shell: bash
       run: cat "${{ inputs.file }}"
