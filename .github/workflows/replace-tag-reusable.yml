@@ -35,7 +35,8 @@ jobs:
           
       - name: Create and push docker image
         run: |
-          IMAGE_NAME=ghcr.io/${{ github.repository }}/replace-tag
+          REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          IMAGE_NAME=ghcr.io/$REPO_LOWER/replace-tag
           COMMIT_HASH=$(git rev-parse --short HEAD)
 
           echo "Building Docker image..."
